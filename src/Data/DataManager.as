@@ -25,13 +25,16 @@ class DataManager {
 				print("saving and loading data");
 				// the map has changed and we are not in the editor.
 				auto_save_running = false;
-				auto saving = startnew(CoroutineFunc(save));
-				while (saving.IsRunning())
-					yield();
+				// auto saving = startnew(CoroutineFunc(save));
+				// while (saving.IsRunning())
+				// 	yield();
+				save();
 
 				localData = Files(this.mapId);
 				// cloudData = Cloud(mapId);
-				startnew(CoroutineFunc(load));
+				// startnew(CoroutineFunc(load));
+				load();
+				localData.start();
 
 				startnew(CoroutineFunc(auto_save));
 			}
